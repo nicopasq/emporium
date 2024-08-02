@@ -1,38 +1,233 @@
-.App {
+
+html,
+body {
+  background-color: rgba(204, 204, 204, 0.309);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  overflow-x: hidden;
+}
+
+.navBar {
+  background-color: white;
+  height: 5vh;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.289);
+}
+
+.navLink {
+  margin-right: 10%;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.725);
+  text-decoration: none;
+}
+
+.siteLinks {
+  width: 10%;
+  position: absolute;
+  top: 1%;
+  left: 1%;
+}
+
+.socialsLinks {
+  position: absolute;
+  top: 1%;
+  right: 10%;
+  width: 6%;
+}
+
+.cart {
+  width: 100%;
+  color: rgba(0, 0, 0, 0.725);
+  text-decoration: none;
+  width: fit-content;
+  position: absolute;
+  top: 1%;
+  right: 5%;
+}
+
+.filtersform {
+  width: 10%;
+  position: absolute;
+  top: 20%;
+  left: 8%;
+}
+
+.productDisplayContainer {
+  height: 100vh;
+  text-align: left;
+  overflow: scroll;
+}
+
+.productCard {
+  /* border:1px solid black; */
+  height: 40vh;
+  width: 25%;
+  display: inline-block;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+.productCard:hover {
+  cursor: pointer;
+}
+
+.cardImage {
+  height: 200px;
+}
+
+.productDisplayContainer::-webkit-scrollbar-track {
+  background-color: rgba(204, 204, 204, 0.309);
+}
+
+.aboutUsImage {
+  position: relative;
+  top: 10vh;
+  left: 12%;
+}
+
+.aboutUsContent {
+  width: 40%;
+  height: fit-content;
+  position: relative;
+  bottom: 55.65vh;
+  left: 45%;
+
+}
+
+.aboutUsText {
+  width: 85%;
+  font-size: 20px;
+  margin-left: 7%;
+}
+
+.contactForm {
+  width: 20%;
+  height: 55vh;
+  position: relative;
+  left: 17%;
+  top: 10vh;
+}
+
+.nameInputs {
+  width: 45%;
+}
+
+.emailInput {
+  width: 100%;
+}
+
+.messageInput {
+  width: 100%;
+}
+
+.contactUsImage {
+  position: relative;
+  bottom: 45vh;
+  left: 55%;
+  width: 20%;
+  height: 60vh;
+  border-radius: 5px;
+}
+
+.heroDiv {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.heroDiv button {
+  color: rgb(75, 75, 75);
+  margin-top: 2%;
+  font-size: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.heroDiv img {
+  position: relative;
+  bottom: 19vh;
+  right: 17%;
+  z-index: -1;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.heroText {
+  position: relative;
+  top: 22vh;
+  left: 8%;
 }
 
-.App-link {
-  color: #61dafb;
+.cartDiv {
+  height: 100vh;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.totalCostDiv {
+  /* border: 1px solid rgba(49, 49, 255, 0.564); */
+  width: 18%;
+  position: relative;
+  left: 65%;
+  bottom: 45vh;
+}
+
+.chips {
+  text-align: center;
+  position: relative;
+  bottom: 15vh;
+}
+
+.itemsTable {
+  width: 30%;
+  height: 60vh;
+  position: relative;
+  left: 20%;
+  top: 14vh;
+}
+
+.productDetailsDiv {
+  height: 100vh;
+}
+.productDetailsDiv img{
+  height: 70vh;
+  position: relative;
+  top: 5vh;
+  left: 13%;
+}
+
+.info{
+  position: relative;
+  left: 58%;
+  bottom: 55vh;
+  width: 30%;
+  height: 50%;
+}
+
+.quantityController{
+  height: 5vh;
+  width: 30%;
+  display: inline-flex;
+}
+
+.detailsInteractivity{
+  height: 35%;
+}
+
+.goBackButton{
+  margin-left: 1%;
+}
+.goBackButton:hover{
+  cursor: pointer;
+}
+
+.loginInputDiv{
+  text-align: center;
+}
+.loginForm{
+  margin-left: auto;
+  margin-right: auto;
+  height: 30vh;
+  width: 10%;
+  position: relative;
+  top: 20vh;
+}
+
+.signUpForm{
+  margin-left: auto;
+  margin-right: auto;
+  height: 30vh;
+  width: 10%;
+  position: relative;
+  top: 15vh;
 }
