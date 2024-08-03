@@ -18,9 +18,9 @@ export default function Cart() {
                 <Table size="small">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Item Name</TableCell>
-                            <TableCell align="right">Quantity</TableCell>
-                            <TableCell align="right">Price</TableCell>
+                            <TableCell><Typography variant="body1">Item Name</Typography></TableCell>
+                            <TableCell align="right"><Typography variant="body1">Quantity</Typography></TableCell>
+                            <TableCell align="right"><Typography variant="body1">Price</Typography></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
