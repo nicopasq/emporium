@@ -155,11 +155,10 @@ body {
 }
 
 .totalCostDiv {
-  /* border: 1px solid rgba(49, 49, 255, 0.564); */
   width: 18%;
   position: relative;
   left: 65%;
-  bottom: 45vh;
+  bottom: 40vh;
 }
 
 .chips {

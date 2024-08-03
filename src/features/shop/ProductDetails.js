@@ -83,7 +83,7 @@ export default function ProductDetails() {
     }
 
   }
-  console.log('cart', cart)
+
   return (
     <div className="productDetailsDiv">
       <p className="goBackButton" onClick={() => navigate(-1)}> {'<<'}BACK TO SHOP</p>
