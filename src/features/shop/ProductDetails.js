@@ -98,7 +98,7 @@ export default function ProductDetails() {
             <Typography variant="h6" sx={{ margin: '5%' }}>{count}</Typography>
             <Button variant="text" name='+' onClick={(e) => handleClick(e)} sx={{ fontSize: '25px' }}>+</Button>
           </div>
-          <Button variant="contained" sx={{ position: 'relative', top: '6vh', }} onClick={submit}>Add To Cart</Button>
+          <Button variant="contained" sx={{ position: 'relative', top: '6vh', }} onClick={submit}>update cart</Button>
         </div>
         <Rating sx={{ marginLeft: '2%', marginTop:'5%' }} value={ratingVal} onChange={(e, newVal) => setRatingVal(newVal)} size="large"/>
       </div>
