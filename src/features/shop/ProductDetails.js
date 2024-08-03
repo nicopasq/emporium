@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import images from '../../images/images'
-import { Button, Typography } from "@mui/material";
+import { Button, Rating, Typography } from "@mui/material";
 import LoremIpsum from "react-lorem-ipsum";
 import { useDispatch, useSelector } from "react-redux";
 import { setCart } from "../../slices/backendSlice";
 
 export default function ProductDetails() {
+  const [ratingVal, setRatingVal] = useState(3.5)
   const cart = useSelector(state => state.backend.cart);
   const dispatch = useDispatch()
   const products = useSelector(state => state.backend.products)
@@ -99,6 +100,7 @@ export default function ProductDetails() {
           </div>
           <Button variant="contained" sx={{ position: 'relative', top: '6vh', }} onClick={submit}>Add To Cart</Button>
         </div>
+        <Rating sx={{ marginLeft: '2%', marginTop:'5%' }} value={ratingVal} onChange={(e, newVal) => setRatingVal(newVal)} size="large"/>
       </div>
     </div>
   )
