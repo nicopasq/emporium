@@ -13,6 +13,7 @@ import product_images from './images/images';
 import ProductDetails from './features/shop/ProductDetails';
 import Login from './features/login/Login';
 import Signup from './features/signup/Signup';
+import Checkout from './features/checkout/Checkout';
 
 function App() {
   const dispatch = useDispatch()
@@ -46,6 +47,7 @@ function App() {
         <Route path='/shop/:type/:id' element={<ProductDetails />} />
         <Route path='/login' element={<Login />} />
         <Route path='/sign_up' element={<Signup />} />
+        <Route path='/checkout' element={<Checkout />} />
       </Routes>
     </div>
   );

@@ -86,7 +86,7 @@ export default function ProductDetails() {
 
   return (
     <div className="productDetailsDiv">
-      <p className="goBackButton" onClick={() => navigate('/shop')}> {'<<'}BACK TO SHOP</p>
+      <Button onClick={() => navigate('/shop')} className="goBackButton">Back to shop</Button>
       <img src={currentProduct.image} className="productDetailsImage" />
       <div className="info">
         <Typography variant="h3">{currentProduct.product_name}</Typography>

@@ -1,19 +1,35 @@
-import { Button, Divider, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
-import React from "react";
-import { useSelector } from "react-redux";
+import { Alert, Button, Divider, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { setCheckout } from "../../slices/backendSlice";
 
 export default function Cart() {
-    const cart = useSelector(state => state.backend.cart)
+    const dispatch = useDispatch()
     const navigate = useNavigate()
+    const cart = useSelector(state => state.backend.cart)
+    const [alert, setAlert] = useState({display:'none'})
     let totalItemSum = 0
     
     cart.map(item => {
         totalItemSum += item.price * item.quantity
     })
     const total = (totalItemSum * .029) + totalItemSum
+
+    function navigateCheckout(){
+        if (total === 0.00){
+            setAlert({display:true})
+            setTimeout(() => {setAlert({display:'none'})}, [3000])
+        } else {
+            navigate('/checkout')
+        }
+
+        dispatch(setCheckout({total:total, items:cart}))
+    }
     return (
         <div className="cartDiv">
+            <Alert severity="error" sx={{display:alert}}>Cart must have items to checkout</Alert>
+            <Button onClick={() => navigate('/shop')} variant="text" sx={{margin:".5%"}}>Back to shop</Button>
             <Paper className="itemsTable">
                 <Table size="small">
                     <TableHead>
@@ -46,7 +62,7 @@ export default function Cart() {
 
                 <Divider sx={{ margin: '5%' }} />
                 <div style={{ textAlign: 'center' }}>
-                    <Button variant='outlined' >Proceed to Checkout</Button>
+                    <Button variant='outlined' onClick={() => navigateCheckout()}>Proceed to Checkout</Button>
                 </div>
             </div>
         </div>

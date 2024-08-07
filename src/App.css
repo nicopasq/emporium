@@ -204,7 +204,9 @@ body {
 }
 
 .goBackButton{
-  margin-left: 1%;
+  position: relative;
+  bottom: 67vh;
+  left: 1%;
 }
 .goBackButton:hover{
   cursor: pointer;

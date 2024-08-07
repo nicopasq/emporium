@@ -3,6 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 export const backendSlice = createSlice({
     initialState:{
         cart:[],
+        checkout:{
+            total:0.00,
+            items:[]
+        },
         products:[
             {
                 "id": 1,
@@ -733,10 +737,14 @@ export const backendSlice = createSlice({
         },
         setCart: (state, action) => {
             state.cart = action.payload
+        },
+        setCheckout: (state, action) => {
+            state.checkout.total = action.payload.total
+            state.checkout.items = action.payload.items
         }
     }
 })
 
-export const {setProducts, setCart} = backendSlice.actions
+export const {setProducts, setCart, setCheckout} = backendSlice.actions
 
 export default backendSlice.reducer
