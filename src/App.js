@@ -16,24 +16,6 @@ import Signup from './features/signup/Signup';
 import Checkout from './features/checkout/Checkout';
 
 function App() {
-  const dispatch = useDispatch()
-
-  // useEffect(() => {
-  //   fetch('/products')
-  //   .then(r => r.json())
-  //   .then(data => {
-  //     data.map(product => {
-  //       return product_images.map(image => {
-  //         if (image.includes(product.image_path)){
-  //           product.image = image
-  //           return product
-  //         }
-  //         return null
-  //       })
-  //     })
-  //     dispatch(setProducts(data))
-  //   })
-  // }, [])
 
   return (
     <div className="App">
