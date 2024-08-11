@@ -88,14 +88,18 @@ export default function Checkout() {
     const cartItems = checkoutObj.items.map(i => (<Typography variant="h5">{i.item}</Typography>))
 
     function handlePagination(e) {
-        e.preventDefault();
-        const id = parseInt(e.target.id)
+        if (e === -1) {
+            setFormDisplay(formDisplay - 1)
+        } else if (e !== -1) {
+            e.preventDefault();
+            const id = parseInt(e.target.id)
 
-        if (id + 1 < forms.length) {
-            setFormDisplay(id + 1)
-        }
-        if (id + 1 === forms.length) {
-            console.log("PROCEED TO CONFIRMATION")
+            if (id + 1 < forms.length) {
+                setFormDisplay(id + 1)
+            }
+            if (id + 1 === forms.length) {
+                console.log("PROCEED TO CONFIRMATION")
+            }
         }
         console.log(formData)
     }
@@ -135,6 +139,7 @@ export default function Checkout() {
                 ))}
             </Select>
             <TextField label="Zip Code" name="address:zip" value={formData.address.zip} onChange={(e) => handleInput(e)} required />
+            <Button onClick={() => handlePagination(-1)}>Back</Button>
             <Button type="submit">Next</Button>
         </form>,
 
@@ -144,6 +149,7 @@ export default function Checkout() {
             <TextField helperText="Card Exp." type="date" required name="billing:expiration" value={formData.billing.expiration} onChange={(e) => handleInput(e)} />
             <TextField label="CVV" required name="billing:cvv" value={formData.billing.cvv} onChange={(e) => handleInput(e)} />
             <FormControlLabel control={<CheckBox />} label="Are the billing and shipping addresses the same?" />
+            <Button onClick={() => handlePagination(-1)}>Back</Button>
             <Button type="submit">Next</Button>
         </form>
     ]
