@@ -4,11 +4,13 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 export default function Checkout() {
     const [formDisplay, setFormDisplay] = useState(0)
-    const checkoutObj = useSelector(state => state.backend.checkout)
     const [checked, setChecked] = useState(true)
+    const checkoutObj = useSelector(state => state.backend.checkout)
+    const navigate = useNavigate()
     const states = [
         "AL",
         "AK",
@@ -95,8 +97,6 @@ export default function Checkout() {
         }
     })
 
-    const cartItems = checkoutObj.items.map(i => (<Typography variant="h5">{i.item}</Typography>))
-
     function handlePagination(e) {
 
         e.preventDefault();
@@ -108,7 +108,7 @@ export default function Checkout() {
             if (parseInt(id) + 1 < forms.length) {
                 setFormDisplay(prev => prev + 1)
             } else {
-                console.log('PROCEED TO CONF')
+                navigate('/confirmation')
             }
         }
 
@@ -126,10 +126,6 @@ export default function Checkout() {
 
     }
 
-    function handleChecked(e) {
-        setChecked(e.target.checked)
-    }
-
     const shortInputSx = {
         marginTop: "3%",
         marginLeft: '1%',
@@ -144,6 +140,7 @@ export default function Checkout() {
 
     const forms = [
         <form id={0} onSubmit={(e) => handlePagination(e)} className="checkoutForm">
+            <p>* = required field</p>
             <div className="fsOne">
                 <TextField sx={shortInputSx} label="First Name" name="user:first" value={formData.user.first} onChange={(e) => handleInput(e)} required />
                 <TextField sx={shortInputSx} label="Last Name" name="user:last" value={formData.user.last} onChange={(e) => handleInput(e)} required />
@@ -160,6 +157,7 @@ export default function Checkout() {
         </form>,
 
         <form id={1} onSubmit={(e) => handlePagination(e)} className="checkoutForm">
+            <p>* = required field</p>
             <div className="fsOne">
                 <TextField sx={shortInputSx} label="First Name" name="address:first" value={formData.address.first} onChange={(e) => handleInput(e)} required />
                 <TextField sx={shortInputSx} label="Last Name" name="address:last" value={formData.address.last} onChange={(e) => handleInput(e)} required />
@@ -187,6 +185,7 @@ export default function Checkout() {
         </form>,
 
         <form id={2} onSubmit={(e) => handlePagination(e)} className="checkoutForm">
+            <p>* = required field</p>
             <div className="fsOne">
                 <TextField sx={shortInputSx} label="Card Holder First Name" required name="billing:first" value={formData.billing.first} onChange={(e) => handleInput(e)} />
                 <TextField sx={shortInputSx} label="Card Holder Last Name" required name="billing:last" value={formData.billing.last} onChange={(e) => handleInput(e)} />
