@@ -4,8 +4,37 @@ export const backendSlice = createSlice({
     initialState:{
         cart:[],
         checkout:{
-            total:0.00,
-            items:[]
+            user: {
+                first: '',
+                last: '',
+                phone: '',
+                email: '',
+            },
+            address: {
+                first: '',
+                last: '',
+                lineOne: '',
+                lineTwo: '',
+                city: '',
+                state: '',
+                zip: ''
+            },
+            billing: {
+                first: '',
+                last: '',
+                expiration: '',
+                cvv: '',
+                card_number:'',
+                address: {
+                    first: '',
+                    last: '',
+                    lineOne: '',
+                    lineTwo: '',
+                    city: '',
+                    state: '',
+                    zip: ''
+                }
+            }
         },
         products:[
             {
@@ -739,8 +768,7 @@ export const backendSlice = createSlice({
             state.cart = action.payload
         },
         setCheckout: (state, action) => {
-            state.checkout.total = action.payload.total
-            state.checkout.items = action.payload.items
+            state.checkout = action.payload
         }
     }
 })

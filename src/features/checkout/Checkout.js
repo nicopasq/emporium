@@ -3,14 +3,14 @@ import { Button, Checkbox, FormControl, FormControlLabel, FormHelperText, Input,
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { setCheckout } from "../../slices/backendSlice";
 
 export default function Checkout() {
     const [formDisplay, setFormDisplay] = useState(0)
-    const [checked, setChecked] = useState(true)
-    const checkoutObj = useSelector(state => state.backend.checkout)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const states = [
         "AL",
         "AK",
@@ -107,11 +107,8 @@ export default function Checkout() {
         } else if (id !== 'back') {
             if (parseInt(id) + 1 < forms.length) {
                 setFormDisplay(prev => prev + 1)
-            } else {
-                navigate('/confirmation')
-            }
+            } 
         }
-
     }
 
     function handleInput(e) {
@@ -136,6 +133,12 @@ export default function Checkout() {
     const inputSx = {
         marginTop: "3%",
         width: '99%'
+    }
+
+    function handleSubmit(e){
+        e.preventDefault();
+        navigate('/confirmation')
+        dispatch(setCheckout(formData))
     }
 
     const forms = [
@@ -184,7 +187,7 @@ export default function Checkout() {
             </div>
         </form>,
 
-        <form id={2} onSubmit={(e) => handlePagination(e)} className="checkoutForm">
+        <form id={2} onSubmit={(e) => handleSubmit(e)} className="checkoutForm">
             <p>* = required field</p>
             <div className="fsOne">
                 <TextField sx={shortInputSx} label="Card Holder First Name" required name="billing:first" value={formData.billing.first} onChange={(e) => handleInput(e)} />
@@ -197,7 +200,6 @@ export default function Checkout() {
             <div className="fsThree">
                 <TextField sx={inputSx} label="Card number"  required name="billing:card_number" value={formData.billing.card_number} onChange={(e) => handleInput(e)} />
             </div>
-            {/* <FormControlLabel control={<Checkbox checked={checked} onChange={handleChecked} />} label="Are the shipping and billing addresses the same?" />  */}
             <div className="formButtons">
                 <Button id="back" onClick={(e) => handlePagination(e)}>Back</Button>
                 <Button type="submit">Submit</Button>
