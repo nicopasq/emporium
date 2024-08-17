@@ -265,3 +265,8 @@ body {
 .formButtons{
   text-align: right;
 }
+.billingSummaryContext{
+  display: inline-flex;
+  width: 100%;
+  margin-bottom: 1%;
+}

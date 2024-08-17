@@ -1,4 +1,4 @@
-import { Button, Container, Divider, Input, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography } from "@mui/material";
+import { Button, Container, Divider, FormControlLabel, Input, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
@@ -6,17 +6,17 @@ import { useNavigate } from "react-router";
 export default function Confirmation() {
     const navigate = useNavigate()
     const formData = useSelector(state => state.backend.checkout)
-    const [shipping, setShipping] = useState({type:'standard:0', add:0})
+    const [shipping, setShipping] = useState({ type: 'standard:0', add: 0 })
     console.log('confirmation page', formData)
 
     const cart = useSelector(state => state.backend.cart)
 
-    function handleShipping(e){
+    function handleShipping(e) {
         const value = e.target.value
         const type = value.split(':')[0]
         const add = parseFloat(value.split(':')[1])
         console.log(add)
-        setShipping({type: e.target.value, add:add})
+        setShipping({ type: e.target.value, add: add })
     }
 
     let totalItemSum = 0
@@ -27,11 +27,21 @@ export default function Confirmation() {
 
     let total = ((totalItemSum * .029) + totalItemSum) + shipping.add
 
+    const num_split = formData.billing.card_number.split('')
+
+    const card_num = num_split.map((num, index) => {
+        if (index === 3 || index === 7 || index === 11) {
+            return num + ' - '
+        }
+        return num
+    }).join('')
 
     return (
-        <Container sx={{height:'100vh'}}>
-             <h1 style={{ fontSize: '60px', fontWeight: '400' }}>Order Summary</h1>
-             <Divider sx={{ bgcolor: 'black' }} />
+        <Container sx={{ position: "absolute", left: '15%' }}>
+            <h1 style={{ fontSize: '60px', fontWeight: '400' }}>Order Summary</h1>
+            <Divider sx={{ bgcolor: 'black' }} />
+                <h1 style={{ fontSize: '40px', fontWeight: '300' }}>Recipient: {formData.address.first} {formData.address.last}</h1>
+            <Divider sx={{ bgcolor: 'black' }} />
 
             <div className="shippingSummary" style={{ marginTop: '3%' }}>
                 <h1 style={{ fontSize: '50px', fontWeight: '300' }}>Shipping</h1>
@@ -44,7 +54,7 @@ export default function Confirmation() {
             </div>
 
             <div className="itemSummary" style={{ marginTop: '3%' }}>
-            <h1 style={{ fontSize: '35px', fontWeight: '300' }}>Items</h1>
+                <h1 style={{ fontSize: '35px', fontWeight: '300' }}>Items</h1>
                 <Table size="small">
                     <TableHead>
                         <TableRow>
@@ -75,12 +85,34 @@ export default function Confirmation() {
                     <Typography variant="h4" sx={{ textIndent: '5%', color: 'seaGreen' }}>${total.toFixed(2)}</Typography>
                 </Paper>
             </div>
-            <Divider sx={{ marginTop:'2%', bgcolor: 'black' }} />
+            <Divider sx={{ marginTop: '2%', bgcolor: 'black' }} />
 
-            <div className="contactSummary">
+            <div className="billingSummary" style={{ marginBottom: '10%' }}>
+                <h1 style={{ fontSize: '50px', fontWeight: '300' }}>Billing</h1>
 
+                <Paper elevation={9} sx={{ width: '40%', marginTop: '1%', bgcolor: "lightgrey" }}>
+                    <div className="billingSummaryContext">
+                        <Typography variant="h6" sx={{ color: 'grey', marginRight: '1%' }}>Card Holder Name:</Typography>
+                        <Typography variant="h5" sx={{ color: 'seaGreen' }}>{formData.billing.first} {formData.billing.last}</Typography>
+                    </div>
+                    <div className="billingSummaryContext">
+                        <Typography variant="h6" sx={{ color: 'grey', marginRight: '1%' }}>Card Number:</Typography>
+                        <Typography variant="h5" sx={{ color: 'seaGreen' }}>{card_num}</Typography>
+                    </div>
+                    <div className="billingSummaryContext">
+                        <Typography variant="h6" sx={{ color: 'grey', marginRight: '1%' }}>CVV:</Typography>
+                        <Typography variant="h5" sx={{ color: 'seaGreen' }}>{formData.billing.cvv}</Typography>
+                    </div>
+                    <div className="billingSummaryContext">
+                        <Typography variant="h6" sx={{ color: 'grey', marginRight: '1%' }}>Expiration:</Typography>
+                        <TextField color="secondary" type="date" variant="standard" value={formData.billing.expiration} disabled />
+                    </div>
+                </Paper>
+
+                <div className="contactSummary">
+
+                </div>
             </div>
-            <div className="billingSummary"></div>
         </Container>
     )
 }
