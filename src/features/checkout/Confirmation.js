@@ -1,15 +1,28 @@
-import { Button, Container, Divider, FormControlLabel, Input, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography } from "@mui/material";
+import { Alert, Button, Container, Divider, FormControlLabel, Input, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { setCart } from "../../slices/backendSlice";
 
 export default function Confirmation() {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const formData = useSelector(state => state.backend.checkout)
     const [shipping, setShipping] = useState({ type: 'standard:0', add: 0 })
+    const [alert, setAlert] = useState({message:'', display:'none'})
     console.log('confirmation page', formData)
 
     const cart = useSelector(state => state.backend.cart)
+
+    function handleClick(){
+        setAlert({message:'Thank you for your order!', display:true})
+
+        setTimeout(() => {
+            setAlert({message:'', display:'none'})
+            navigate('/shop')
+            dispatch(setCart([]))
+        }, [5000])
+    }
 
     function handleShipping(e) {
         const value = e.target.value
@@ -27,10 +40,18 @@ export default function Confirmation() {
 
     let total = ((totalItemSum * .029) + totalItemSum) + shipping.add
 
-    const num_split = formData.billing.card_number.split('')
+    const cardNum_split = formData.billing.card_number.split('')
 
-    const card_num = num_split.map((num, index) => {
+    const card_num = cardNum_split.map((num, index) => {
         if (index === 3 || index === 7 || index === 11) {
+            return num + ' - '
+        }
+        return num
+    }).join('')
+
+    const phone = formData.user.phone.split('')
+    const phoneNum = phone.map((num, index) => {
+        if (index === 2 || index === 5 ) {
             return num + ' - '
         }
         return num
@@ -38,9 +59,10 @@ export default function Confirmation() {
 
     return (
         <Container sx={{ position: "absolute", left: '15%' }}>
+            <Alert severity="success" sx={{display: alert.display}}>{alert.message}</Alert>
             <h1 style={{ fontSize: '60px', fontWeight: '400' }}>Order Summary</h1>
             <Divider sx={{ bgcolor: 'black' }} />
-                <h1 style={{ fontSize: '40px', fontWeight: '300' }}>Recipient: {formData.address.first} {formData.address.last}</h1>
+            <h1 style={{ fontSize: '40px', fontWeight: '300' }}>Recipient: {formData.address.first} {formData.address.last}</h1>
             <Divider sx={{ bgcolor: 'black' }} />
 
             <div className="shippingSummary" style={{ marginTop: '3%' }}>
@@ -110,8 +132,24 @@ export default function Confirmation() {
                 </Paper>
 
                 <div className="contactSummary">
+                    <h1 style={{ fontSize: '50px', fontWeight: '300' }}>Contact</h1>
 
+                    <Paper elevation={9} sx={{ width: '40%', marginTop: '1%', bgcolor: "lightgrey" }}>
+                        <div className="billingSummaryContext">
+                            <Typography variant="h6" sx={{ color: 'grey', marginRight: '1%' }}>Name:</Typography>
+                            <Typography variant="h5" sx={{ color: 'seaGreen' }}>{formData.user.first} {formData.user.last}</Typography>
+                        </div>
+                        <div className="billingSummaryContext">
+                            <Typography variant="h6" sx={{ color: 'grey', marginRight: '1%' }}>Phone:</Typography>
+                            <Typography variant="h5" sx={{ color: 'seaGreen' }}>{phoneNum}</Typography>
+                        </div>
+                        <div className="billingSummaryContext">
+                            <Typography variant="h6" sx={{ color: 'grey', marginRight: '1%' }}>E-mail:</Typography>
+                            <Typography variant="h5" sx={{ color: 'seaGreen' }}>{formData.user.email}</Typography>
+                        </div>
+                    </Paper>
                 </div>
+            <Button variant="contained" sx={{float:'right'}} onClick={handleClick}>Proceed with order</Button>
             </div>
         </Container>
     )

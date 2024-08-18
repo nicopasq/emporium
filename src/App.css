@@ -270,3 +270,8 @@ body {
   width: 100%;
   margin-bottom: 1%;
 }
+.contactSummary{
+  position: relative;
+  left: 60%;
+  bottom: 28.25vh;
+}
