@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Filters from "./Filters";
 import { useSelector } from "react-redux";
-import { Container } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import ProductCard from "./ProductCard";
 
 export default function Shop() {
@@ -67,6 +67,7 @@ export default function Shop() {
     return (
         <div>
             <Container className="productDisplayContainer">
+            <Typography variant="h5" sx={{position:"relative", top:'5vh', left:'5%'}}>Displaying Results: {display.length}</Typography>
                 {display}
             </Container>
             <Filters filterProducts={filterProducts} highestPrice={highestPrice} />

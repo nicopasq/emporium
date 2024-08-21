@@ -86,7 +86,7 @@ export default function ProductDetails() {
 
   return (
     <div className="productDetailsDiv">
-      <Button onClick={() => navigate('/shop')} className="goBackButton">Back to shop</Button>
+      <Button onClick={() => navigate(-1)} className="goBackButton">Back to shop</Button>
       <img src={currentProduct.image} className="productDetailsImage" />
       <div className="info">
         <Typography variant="h3">{currentProduct.product_name}</Typography>
@@ -98,7 +98,7 @@ export default function ProductDetails() {
             <Typography variant="h6" sx={{ margin: '5%' }}>{count}</Typography>
             <Button variant="text" name='+' onClick={(e) => handleClick(e)} sx={{ fontSize: '25px' }}>+</Button>
           </div>
-          <Button variant="contained" sx={{ position: 'relative', top: '6vh', }} onClick={submit}>update cart</Button>
+          <Button variant="contained" sx={{ position: 'relative', top: '6vh', right:"15vh"}} onClick={submit}>update cart</Button>
         </div>
         <Rating sx={{ marginLeft: '2%', marginTop:'5%' }} value={ratingVal} onChange={(e, newVal) => setRatingVal(newVal)} size="large"/>
       </div>

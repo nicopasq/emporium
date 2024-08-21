@@ -28,10 +28,10 @@ function App() {
         <Route path='/contact' element={<Contact />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/shop/:type/:id' element={<ProductDetails />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/sign_up' element={<Signup />} />
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/confirmation' element={<Confirmation />} /> 
+        {/* <Route path='/login' element={<Login />} />
+        <Route path='/sign_up' element={<Signup />} /> */}
       </Routes>
     </div>
   );
